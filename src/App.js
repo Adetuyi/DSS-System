@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Playground, Home, PageNotFound } from './pages';
+import { Playground, Home, PageNotFound, Login, ResetPassword } from './pages';
 import { ApplyLayout } from './layout';
 import { Approutes } from './constants';
 import { GlobalStyles, theme } from './base';
@@ -27,6 +27,8 @@ function App() {
 							<Route path={Approutes.home} element={<Home />} />
 						</Route>
 
+						<Route path={Approutes.login} element={<Login />} />
+						<Route path={Approutes.reset_password} element={<ResetPassword />} />
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>
 				</BrowserRouter>

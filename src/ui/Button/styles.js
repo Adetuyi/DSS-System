@@ -10,13 +10,14 @@ const rotate = keyframes`
 `;
 
 export const StyledButton = styled.button`
-	${({ theme }) => theme.mixins.text16};
-
+	font-size: 1rem;
+	line-height: 120%;
 	border-radius: 80px;
-	min-height: 52px; // size === large
+	min-height: 52px;
 	padding: 0.625rem 1.25rem; //$variant === primary
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 0.5rem;
 
 	:disabled {
@@ -92,25 +93,6 @@ export const StyledButton = styled.button`
 		`};
 	/* Variant end */
 
-	/* Size start */
-	${({ size }) =>
-		size === 'medium' &&
-		css`
-			${({ theme }) => theme.mixins.text14};
-
-			min-height: 44px;
-			padding: 0.5rem 1rem;
-		`};
-	${({ size }) =>
-		size === 'small' &&
-		css`
-			${({ theme }) => theme.mixins.text14};
-
-			min-height: 36px;
-			padding: 0.25rem 1rem;
-		`};
-	/* Size end */
-
 	.spinner {
 		animation: ${rotate} 1s infinite linear;
 
@@ -120,17 +102,6 @@ export const StyledButton = styled.button`
 				path {
 					stroke: ${({ theme }) => theme.colors.primary700};
 				}
-			`};
-
-		${({ size }) =>
-			size === 'medium' &&
-			css`
-				width: 17px;
-			`};
-		${({ size }) =>
-			size === 'small' &&
-			css`
-				width: 14px;
 			`};
 	}
 `;

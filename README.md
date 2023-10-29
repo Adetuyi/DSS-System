@@ -45,7 +45,7 @@ All`(*)` exports should come before named exports and should be arranged accordi
 
 ## Styling
 
-Colors, mixins and fonts are all in the theme of styled components which are exported from `base/theme.js`. Check the theme to see if a styling or color you need is already there before creating a new style.
+Colors and fonts are all in the theme of styled components which are exported from `base/theme.js`. Check the theme to see if a styling or color you need is already there before creating a new style.
 
 **rem** and **em** should be used in place of **px** where applicable.
 

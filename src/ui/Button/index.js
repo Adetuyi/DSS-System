@@ -1,11 +1,9 @@
 import { Spinner } from '../../assets/svgs';
 import { StyledButton } from './styles';
 
-const Button = (props) => {
-	const { variant = 'primary', size = 'medium', loading, children, ...rest } = props;
-
+const Button = ({ variant = 'primary', loading, children, ...rest }) => {
 	return (
-		<StyledButton $variant={variant} size={size} {...rest}>
+		<StyledButton $variant={variant} {...rest}>
 			{loading ? variant === 'text' ? 'Loading...' : <Spinner className="spinner" /> : children}
 		</StyledButton>
 	);

@@ -66,60 +66,6 @@ const colors = {
 	white: '#ffffff',
 	grey: '#C7C7C7',
 };
-const mixins = {
-	text10: css`
-		font-size: 0.625rem;
-		line-height: 120%;
-	`,
-	text12: css`
-		font-size: 0.75rem;
-		line-height: 120%;
-	`,
-	text14: css`
-		font-size: 0.875rem;
-		line-height: 200%;
-	`,
-	text16: css`
-		font-size: 1rem;
-		line-height: 200%;
-	`,
-	text18: css`
-		font-size: 1.125rem;
-		line-height: 120%;
-	`,
-	text19: css`
-		font-size: 1.1875rem;
-		line-height: 120%;
-	`,
-	text23: css`
-		font-size: 1.4375rem;
-		line-height: 120%;
-	`,
-	text28: css`
-		font-size: 1.75rem;
-		line-height: 120%;
-	`,
-	text33: css`
-		font-size: 2.0625rem;
-		line-height: 120%;
-	`,
-	text40: css`
-		font-size: 2.5rem;
-		line-height: 120%;
-	`,
-	text48: css`
-		font-size: 3rem;
-		line-height: 120%;
-	`,
-	text60: css`
-		font-size: 3.75rem;
-		line-height: 120%;
-	`,
-	text72: css`
-		font-size: 4.5rem;
-		line-height: 120%;
-	`,
-};
 const fonts = {
 	nunitoSans: css`
 		font-family: 'Nunito Sans', sans-serif;
@@ -137,7 +83,6 @@ const breakpoints = {
 };
 const theme = {
 	colors,
-	mixins,
 	fonts,
 	breakpoints,
 };
