@@ -1,15 +1,15 @@
-import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar';
 import { Container } from './styles';
+import { Outlet } from 'react-router-dom';
 
 const ApplyLayout = () => {
 	return (
 		<Container>
 			<Navbar />
 
-			<section>
+			<main>
 				<Outlet />
-			</section>
+			</main>
 		</Container>
 	);
 };

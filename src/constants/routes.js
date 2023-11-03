@@ -1,6 +1,18 @@
 export const Approutes = {
+	auth: {
+		login: '/login',
+		reset_password: '/reset-password',
+	},
+	dashboard: {
+		index: '/dashboard',
+		lecturer: '/dashboard/lecturer',
+		student: '/dashboard/student',
+	},
+	settings: { initial: '/settings', profile: '/settings/profile', department: '/settings/department', users: '/settings/users' },
+	students: {
+		initial: '/student',
+		management: '/student/management',
+	},
 	home: '/',
-	login: '/login',
 	playground: '/playground',
-	reset_password: '/reset-password',
 };

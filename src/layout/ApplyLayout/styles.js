@@ -5,9 +5,11 @@ export const Container = styled.div`
 	display: flex;
 	height: 100vh;
 
+	> * {
+		overflow: auto;
+	}
 	main {
 		flex: 1;
-		overflow: auto;
 		padding: 2rem 2rem 1rem;
 
 		${maxQuery('md')} {

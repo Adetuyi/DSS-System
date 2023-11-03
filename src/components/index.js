@@ -1,1 +1,1 @@
-// Export all components from here
+export { default as PageHeader } from './PageHeader';
