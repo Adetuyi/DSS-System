@@ -69,8 +69,8 @@ const navList = [
 			default: <Students />,
 		},
 		menu: [
-			{ name: 'Active', link: Approutes.students.initial },
-			{ name: 'Potential', link: Approutes.students.initial },
+			{ name: 'Active', link: Approutes.students.management },
+			{ name: 'Potential', link: Approutes.students.management },
 		],
 	},
 	{

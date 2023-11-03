@@ -30,8 +30,8 @@ function App() {
 							<Route path={Approutes.students.management} element={<StudentManagement />} />
 						</Route>
 
-						<Route path={Approutes.login} element={<Login />} />
-						<Route path={Approutes.reset_password} element={<ResetPassword />} />
+						<Route path={Approutes.auth.login} element={<Login />} />
+						<Route path={Approutes.auth.reset_password} element={<ResetPassword />} />
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>
 				</BrowserRouter>
