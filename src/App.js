@@ -1,6 +1,18 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Playground, Home, PageNotFound, Login, ResetPassword, StudentManagement, Settings, Profile } from './pages';
+import {
+	Playground,
+	Home,
+	PageNotFound,
+	Login,
+	ResetPassword,
+	StudentManagement,
+	Settings,
+	Profile,
+	Dashboard,
+	StudentDashboard,
+	LecturerDashboard,
+} from './pages';
 import { ApplyLayout } from './layout';
 import { Approutes } from './constants';
 import { GlobalStyles, theme } from './base';
@@ -25,6 +37,9 @@ function App() {
 						{/* Use default layout on theses pages */}
 						<Route element={<ApplyLayout />}>
 							<Route path={Approutes.home} element={<Home />} />
+							<Route path={Approutes.dashboard.index} element={<Dashboard />} />
+							<Route path={Approutes.dashboard.lecturer} element={<LecturerDashboard />} />
+							<Route path={Approutes.dashboard.student} element={<StudentDashboard />} />
 							<Route path={Approutes.settings.initial} element={<Settings />} />
 							<Route path={Approutes.settings.profile} element={<Profile />} />
 							<Route path={Approutes.students.management} element={<StudentManagement />} />

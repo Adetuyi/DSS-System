@@ -6,6 +6,8 @@ export { ReactComponent as Dashboard } from './Dashboard.svg';
 export { ReactComponent as DashboardActive } from './DashboardActive.svg';
 export { ReactComponent as EyeOpen } from './EyeOpen.svg';
 export { ReactComponent as EyeSlashed } from './EyeSlashed.svg';
+export { ReactComponent as FilterOne } from './FilterOne.svg';
+export { ReactComponent as FilterTwo } from './FilterTwo.svg';
 export { ReactComponent as Info } from './Info.svg';
 export { ReactComponent as Logout } from './Logout.svg';
 export { ReactComponent as Menu } from './Menu.svg';

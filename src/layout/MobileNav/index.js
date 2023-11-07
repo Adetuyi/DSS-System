@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './styles';
-import { Approutes } from '../../constants';
-import { CaretDown, Dashboard, DashboardActive, Logo, Logout, Setting, SettingActive, Students, Trainers } from '../../assets/svgs';
+import { Approutes, navList } from '../../constants';
+import { CaretDown, Logo, Logout } from '../../assets/svgs';
 import { useEffect, useRef } from 'react';
 
 const MobileNav = ({ setNav, nav }) => {
@@ -34,7 +34,7 @@ const MobileNav = ({ setNav, nav }) => {
 						<ul>
 							{navList.map((list) =>
 								list.menu ? (
-									<li className={`isDrop ${pathname.includes(list.link) ? 'hasActiveChild' : ''}`} key={list.name}>
+									<li className={`isDrop ${pathname.startsWith(list.link) ? 'hasActiveChild' : ''}`} key={list.name}>
 										<div tabIndex={0}>
 											<span>{list.svg.default}</span> {list.name} <CaretDown className="caret" />
 										</div>
@@ -90,44 +90,3 @@ const MobileNav = ({ setNav, nav }) => {
 };
 
 export default MobileNav;
-
-const navList = [
-	{
-		name: 'Dashboard',
-		link: Approutes.dashboard.index,
-		svg: {
-			default: <Dashboard />,
-			active: <DashboardActive />,
-		},
-	},
-	{
-		name: 'Students',
-		link: Approutes.students.initial,
-		svg: {
-			default: <Students />,
-		},
-		menu: [
-			{ name: 'Active', link: Approutes.students.initial },
-			{ name: 'Potential', link: Approutes.students.initial },
-		],
-	},
-	{
-		name: 'Trainers',
-		link: Approutes.students.initial,
-		svg: {
-			default: <Trainers />,
-		},
-		menu: [
-			{ name: 'Instructor', link: Approutes.students.initial },
-			{ name: 'Mentor', link: Approutes.students.initial },
-		],
-	},
-	{
-		name: 'Settings',
-		link: Approutes.settings.initial,
-		svg: {
-			default: <Setting />,
-			active: <SettingActive />,
-		},
-	},
-];
