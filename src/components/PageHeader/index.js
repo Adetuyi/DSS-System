@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { CaretDownFill, Logo, Logout, Menu } from '../../assets/svgs';
+import { CaretDownFill, Logout, Menu } from '../../assets/svgs';
 import { MobileNav } from '../../layout';
 import { Header, MobileHeader } from './styles';
+import { Icon } from '../../assets/images';
 
 const PageHeader = ({ title, children }) => {
 	const [nav, setNav] = useState(false);
@@ -11,7 +12,10 @@ const PageHeader = ({ title, children }) => {
 			<MobileNav setNav={setNav} nav={nav} />
 			<MobileHeader>
 				<div>
-					<Logo />
+					<div className="icon-con">
+						<img src={Icon} alt="" />
+						Eduguide
+					</div>
 					{children}
 				</div>
 				<Menu onClick={() => setNav(!nav)} />

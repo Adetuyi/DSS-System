@@ -12,6 +12,7 @@ import {
 	Dashboard,
 	StudentDashboard,
 	LecturerDashboard,
+	Events,
 } from './pages';
 import { ApplyLayout } from './layout';
 import { Approutes } from './constants';
@@ -38,6 +39,7 @@ function App() {
 						<Route element={<ApplyLayout />}>
 							<Route path={Approutes.home} element={<Home />} />
 							<Route path={Approutes.dashboard.index} element={<Dashboard />} />
+							<Route path={Approutes.events} element={<Events />} />
 							<Route path={Approutes.dashboard.lecturer} element={<LecturerDashboard />} />
 							<Route path={Approutes.dashboard.student} element={<StudentDashboard />} />
 							<Route path={Approutes.settings.initial} element={<Settings />} />

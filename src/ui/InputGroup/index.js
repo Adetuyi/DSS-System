@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { StyledInputGroup } from './styles';
-import { EyeOpen, EyeSlashed } from '../../assets/svgs';
+import { EyeOpen, EyeSlashed, Search } from '../../assets/svgs';
 
-const InputGroup = ({ label, value = '', onChange, placeholder, variant = 'input', type = 'text', name, required = false, ...rest }) => {
+const InputGroup = ({
+	label,
+	value = '',
+	onChange,
+	placeholder,
+	variant = 'input',
+	type = 'text',
+	isSearching,
+	name,
+	required = false,
+	...rest
+}) => {
 	const [passwordVisible, setPasswordVisible] = useState(false);
 
 	return (
-		<StyledInputGroup>
+		<StyledInputGroup $isSearching={isSearching} $hasLabel={label ? true : false}>
 			{variant === 'input' ? (
 				<input
 					type={type === 'password' ? (passwordVisible ? 'text' : 'password') : type}
@@ -33,6 +44,7 @@ const InputGroup = ({ label, value = '', onChange, placeholder, variant = 'input
 					<EyeSlashed className={passwordVisible ? '' : 'active'} />
 				</div>
 			) : null}
+			{isSearching ? <Search /> : null}
 		</StyledInputGroup>
 	);
 };

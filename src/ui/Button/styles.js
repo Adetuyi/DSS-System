@@ -10,11 +10,11 @@ const rotate = keyframes`
 `;
 
 export const StyledButton = styled.button`
-	font-size: 1rem;
+	font-size: 0.875rem;
 	line-height: 120%;
 	border-radius: 80px;
-	min-height: 52px;
-	padding: 0.625rem 1.25rem; //$variant === primary
+	min-height: 44px;
+	padding: 0.5rem 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -36,7 +36,14 @@ export const Container = styled.div`
 			overflow: auto;
 
 			.logo {
-				margin-bottom: 3.75rem;
+				margin-bottom: 1.75rem;
+				display: grid;
+				justify-content: center;
+
+				img {
+					max-width: 100%;
+					width: 7rem;
+				}
 			}
 
 			nav {

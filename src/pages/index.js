@@ -1,6 +1,7 @@
 export * from './Dashboard/exports';
 export * from './Settings/exports';
 export { default as Dashboard } from './Dashboard';
+export { default as Events } from './Events';
 export { default as Home } from './Home';
 export { default as Login } from './Login';
 export { default as Playground } from './Playground';

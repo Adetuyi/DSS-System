@@ -1,17 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledInputGroup = styled.div`
 	position: relative;
 
-	:focus-within {
-		label {
-			color: #4060ea;
-		}
-		input,
-		textarea {
-			outline: 1.5px solid #4060ea;
-		}
-	}
+	${({ $isSearching }) =>
+		$isSearching &&
+		css`
+			input {
+				padding: 0.75rem 1rem 0.75rem 2.5rem !important;
+			}
+
+			> svg {
+				position: absolute;
+				bottom: 50%;
+				transform: translateY(50%);
+				left: 0.75rem;
+				width: 1rem;
+			}
+		`}
+
 	/* label {
 		color: #494848;
 		font-weight: 500;
@@ -54,6 +61,7 @@ export const StyledInputGroup = styled.div`
 		left: 1rem;
 		line-height: 120%;
 		font-size: 0.75rem;
+		color: ${({ theme }) => theme.colors.neutral500};
 
 		span {
 			color: ${({ theme }) => theme.colors.accent800};
@@ -61,14 +69,14 @@ export const StyledInputGroup = styled.div`
 	}
 
 	input {
+		border: 1px solid ${({ theme }) => theme.colors.neutral100};
+		padding: 1.5rem 1rem 0.5rem;
 		font-size: 0.875rem;
-		line-height: 120%;
+		line-height: 140%;
 		outline: none;
 		width: 100%;
 		background: transparent;
 		border-radius: 0.25rem;
-		border: 1px solid #dadada;
-		padding: 1.75rem 1rem 0.5rem;
 
 		:focus {
 			border: 1px solid ${({ theme }) => theme.colors.primary700};

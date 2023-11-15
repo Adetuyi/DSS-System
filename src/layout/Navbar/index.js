@@ -1,7 +1,8 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Aside } from './styles';
 import { Approutes, navList } from '../../constants';
-import { CaretDown, Logo, Logout } from '../../assets/svgs';
+import { CaretDown, Logout } from '../../assets/svgs';
+import { Logo } from '../../assets/images';
 
 const Navbar = () => {
 	const { pathname } = useLocation();
@@ -9,7 +10,7 @@ const Navbar = () => {
 	return (
 		<Aside>
 			<div className="logo">
-				<Logo />
+				<img src={Logo} alt="" />
 			</div>
 
 			<nav>

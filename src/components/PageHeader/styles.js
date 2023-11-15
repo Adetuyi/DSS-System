@@ -104,10 +104,19 @@ export const MobileHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 1rem;
-	/* border: 1px solid red; */
 
-	> svg {
-		cursor: pointer;
+	.icon-con {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		color: #126da9;
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+
+		img {
+			width: 3rem;
+		}
 	}
 	${minQuery('lg')} {
 		display: none;

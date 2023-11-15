@@ -1,5 +1,5 @@
 import { Approutes } from './routes';
-import { Dashboard, DashboardActive, Setting, SettingActive, Students, Trainers } from '../assets/svgs';
+import { Dashboard, DashboardActive, Setting, SettingActive, Students, Trainers, Events, EventsActive } from '../assets/svgs';
 
 export const navList = [
 	{
@@ -8,6 +8,14 @@ export const navList = [
 		svg: {
 			default: <Dashboard />,
 			active: <DashboardActive />,
+		},
+	},
+	{
+		name: 'Events',
+		link: Approutes.events,
+		svg: {
+			default: <Events />,
+			active: <EventsActive />,
 		},
 	},
 	{

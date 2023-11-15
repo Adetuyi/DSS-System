@@ -8,6 +8,7 @@ export const Approutes = {
 		lecturer: '/dashboard/lecturer',
 		student: '/dashboard/student',
 	},
+	events: '/events',
 	settings: { initial: '/settings', profile: '/settings/profile', department: '/settings/department', users: '/settings/users' },
 	students: {
 		initial: '/student',

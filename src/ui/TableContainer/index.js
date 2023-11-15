@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FilterOne, FilterTwo } from '../../assets/svgs';
 import { Button, InputGroup } from '..';
 import { Container } from './styles';
@@ -45,7 +45,6 @@ const TableContainer = ({ columns, dataSource, title, options, selection, onRow,
 				let hasMached = false;
 
 				return Object.entries(item).forEach((data) => {
-					console.log(data[1]);
 					if (data[1] && typeof data[1] === 'string' && data[1].toLowerCase() === status && !hasMached) {
 						hasMached = true;
 						filteredResult.push(item);
@@ -57,9 +56,6 @@ const TableContainer = ({ columns, dataSource, title, options, selection, onRow,
 			return;
 		}
 	}, [status, dataSource]);
-
-	// console.log(tableData);
-	const { pathname } = useLocation();
 
 	return (
 		<Container>
@@ -74,17 +70,17 @@ const TableContainer = ({ columns, dataSource, title, options, selection, onRow,
 					>
 						{options.placeholder && (
 							<InputGroup
-								type="search"
 								value={searchVal}
 								onChange={({ target: { value } }) => setSearchVal(value)}
 								placeholder={options.placeholder}
+								isSearching
 							/>
 						)}
 
 						<div className="button--group">
 							{options.filter && (
 								<div className="dropdown--con">
-									<Button type="secondary">
+									<Button variant="secondary">
 										<FilterOne />
 										{options.filter.placeholder}
 									</Button>
@@ -125,11 +121,7 @@ const TableContainer = ({ columns, dataSource, title, options, selection, onRow,
 				)}
 			</header>
 
-			{pathname === '/events' ? (
-				<Table columns={columns} dataSource={tableData} rowSelection={selection} onRow={onRow} scroll={{ x: true }} />
-			) : (
-				<Table columns={columns} dataSource={tableData} scroll={{ x: true }} />
-			)}
+			<Table columns={columns} dataSource={tableData} rowSelection={selection} onRow={onRow} scroll={{ x: true }} />
 		</Container>
 	);
 };

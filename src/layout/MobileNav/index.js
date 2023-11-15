@@ -1,8 +1,9 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Container } from './styles';
 import { Approutes, navList } from '../../constants';
-import { CaretDown, Logo, Logout } from '../../assets/svgs';
+import { CaretDown, Logout } from '../../assets/svgs';
 import { useEffect, useRef } from 'react';
+import { Logo } from '../../assets/images';
 
 const MobileNav = ({ setNav, nav }) => {
 	const { pathname } = useLocation();
@@ -27,7 +28,7 @@ const MobileNav = ({ setNav, nav }) => {
 			<div className={nav ? 'show' : 'close'}>
 				<aside ref={navRef}>
 					<div className="logo">
-						<Logo />
+						<img src={Logo} alt="" />
 					</div>
 
 					<nav>

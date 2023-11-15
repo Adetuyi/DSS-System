@@ -4,6 +4,7 @@ export { StyledButton } from './Button/styles';
 export { default as InputGroup } from './InputGroup';
 export { StyledInputGroup } from './InputGroup/styles';
 export { default as Loader } from './Loader';
+export { default as Modal } from './Modal';
 export { default as Notification } from './Notification';
 export { default as Pallet } from './Pallet';
 export { default as PalletList } from './PalletList/styles';
