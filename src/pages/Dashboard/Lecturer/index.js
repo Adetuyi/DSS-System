@@ -6,9 +6,11 @@ import { Pallet, PalletList, ProgressBar, TableContainer, CustomPieChart, BarCha
 import { useState } from 'react';
 import { DatePicker } from 'antd';
 import { studentTableColumns } from '../../../constants';
+import { useAuth } from '../../../hooks';
 
 const LecturerDashboard = () => {
 	const [barData, setBarData] = useState('Revenue');
+	const { user } = useAuth();
 
 	const handleGetYearBarData = (year) => {
 		console.log(year);
@@ -21,7 +23,7 @@ const LecturerDashboard = () => {
 		<Container>
 			<PageHeader>
 				<div className="page--header">
-					<h4>Welcome back, Sheyi 🌞</h4>
+					<h4>Welcome back, {user?.first_name} 🌞</h4>
 					<p>
 						This is your stats today - <span>{getDateTime(new Date(), 'mm dd yyyy')}</span>
 					</p>

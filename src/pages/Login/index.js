@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { Container } from './styles';
-import { Link } from 'react-router-dom';
-import { Approutes } from '../../constants';
+import { Link, useNavigate } from 'react-router-dom';
+import { Approutes, Appurls } from '../../constants';
+import { RequireNoAuth } from '../../components';
+import { useAuth, useAxios, useNotify } from '../../hooks';
+import { useMutation } from '@tanstack/react-query';
 
 const Login = () => {
+	const axios = useAxios();
+	const notify = useNotify();
+	const navigate = useNavigate();
+	const { setUser } = useAuth();
 	const [formData, setFormData] = useState({ username: '', password: '' });
+	const { mutate: login, isPending } = useMutation({ mutationFn: (data) => axios.post(Appurls.auth.login, data) });
 
 	const handleChange = (event, name, value) => {
 		name = event.target.name || name || '';
@@ -13,41 +21,61 @@ const Login = () => {
 
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		login(formData, {
+			onSuccess: (data) => {
+				setUser(data.data);
+				localStorage.setItem('authUser', JSON.stringify(data.data));
+				navigate(Approutes.home);
+			},
+			onError: (error) => {
+				notify({
+					message: error?.response?.data?.details || 'Something went wrong while trying to sign you in',
+					status: 'error',
+					toastOptions: { toastId: 'login_error' },
+				});
+			},
+		});
+	};
 
 	return (
-		<Container>
-			<div>
-				<h1>Welcome back!</h1>
-			</div>
-			<div>
-				<form onSubmit={(event) => event.preventDefault()}>
-					<h2>Log in</h2>
-					<p>Welcome back! Please enter your details.</p>
+		<RequireNoAuth>
+			<Container>
+				<div>
+					<h1>Welcome back!</h1>
+				</div>
+				<div>
+					<form onSubmit={handleSubmit}>
+						<h2>Log in</h2>
+						<p>Welcome back! Please enter your details.</p>
 
-					<div>
-						<InputGroup
-							label="Username / Matric number"
-							name="username"
-							onChange={handleChange}
-							placeholder="username / 20*******0"
-							required
-							value={formData.username}
-						/>
-						<InputGroup
-							label="Password"
-							name="password"
-							type="password"
-							onChange={handleChange}
-							placeholder=". . . . . . . ."
-							required
-							value={formData.password}
-						/>
-						<Link to={Approutes.reset_password}>Reset Password</Link>
-						<Button>Sign in</Button>
-					</div>
-				</form>
-			</div>
-		</Container>
+						<div>
+							<InputGroup
+								label="Username / Matric number"
+								name="username"
+								onChange={handleChange}
+								placeholder="username / 20*******0"
+								required
+								value={formData.username}
+							/>
+							<InputGroup
+								label="Password"
+								name="password"
+								type="password"
+								onChange={handleChange}
+								placeholder=". . . . . . . ."
+								required
+								value={formData.password}
+							/>
+							<Link to={Approutes.reset_password}>Reset Password</Link>
+							<Button loading={isPending}>Sign in</Button>
+						</div>
+					</form>
+				</div>
+			</Container>
+		</RequireNoAuth>
 	);
 };
 export default Login;

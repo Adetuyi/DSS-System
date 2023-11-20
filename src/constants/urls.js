@@ -1,5 +1,9 @@
 export const Appurls = {
 	auth: {
-		refresh_token: '/auth/token/refresh/',
+		get_csrf_token: '/get-csrf-token/',
+		login: '/token/',
+		refresh_token: '/token/refresh',
+		change_password: '/change-password/',
+		update_profile: '/update-profile/',
 	},
 };

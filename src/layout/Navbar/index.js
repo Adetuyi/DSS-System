@@ -41,7 +41,7 @@ const Navbar = () => {
 				</ul>
 
 				<ul>
-					<Link to={Approutes.auth.login}>
+					<Link to={Approutes.auth.logout}>
 						<li>
 							<Logout /> Logout
 						</li>

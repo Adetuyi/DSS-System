@@ -88,7 +88,7 @@ export const Header = styled.header`
 		min-width: fit-content;
 		z-index: 10;
 
-		li {
+		a {
 			font-size: 0.875rem;
 			line-height: 120%;
 			display: flex;

@@ -1,16 +1,19 @@
+import { RequireAuth } from '../../components';
 import Navbar from '../Navbar';
 import { Container } from './styles';
 import { Outlet } from 'react-router-dom';
 
 const ApplyLayout = () => {
 	return (
-		<Container>
-			<Navbar />
+		<RequireAuth>
+			<Container>
+				<Navbar />
 
-			<main>
-				<Outlet />
-			</main>
-		</Container>
+				<main>
+					<Outlet />
+				</main>
+			</Container>
+		</RequireAuth>
 	);
 };
 

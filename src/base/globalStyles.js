@@ -66,6 +66,39 @@ const GlobalStyles = createGlobalStyle`
       font-size: 1.1875rem;
       line-height: 120%;
    }
+   .error-message {
+      color: #ff7542;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin: 0;
+   }
+   .Toastify__toast-container {
+      padding: 0;
+      width: auto;
+
+      @media screen and (max-width:480px) {
+         &.Toastify__toast-container--bottom-center {
+            bottom: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+         }
+         &.Toastify__toast-container--top-center {
+            top: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+         }
+      }
+      
+      .Toastify__toast {
+         padding: 0;
+         margin-bottom: 0;
+         min-height: unset;
+         background: none;
+      }
+      .Toastify__toast-body {
+         padding: 0;
+      }
+   }
 `;
 
 export default GlobalStyles;

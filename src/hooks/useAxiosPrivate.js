@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useAuth, useNotify, useRefreshToken } from '.';
 import { axiosPrivate } from '../library';
+import { useQueryClient } from '@tanstack/react-query';
 
 const useAxiosPrivate = () => {
-	const { auth, setAuth } = useAuth();
+	const { authTokens, setAuthTokens, setUser } = useAuth();
 	const notify = useNotify();
 	const refresh = useRefreshToken();
+	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		const requestInterceptor = axiosPrivate.interceptors.request.use(
@@ -13,7 +15,7 @@ const useAxiosPrivate = () => {
 				config.headers = config.headers ?? {};
 
 				if (!config?.headers['Authorization']) {
-					config.headers['Authorization'] = `Bearer ${auth?.access || localStorage.getItem('access')}`;
+					config.headers['Authorization'] = `Bearer ${authTokens?.access}`;
 				}
 				return config;
 			},
@@ -30,18 +32,16 @@ const useAxiosPrivate = () => {
 					prevRequest.hasSent = true;
 
 					try {
-						const {
-							data: { access: newAccessToken },
-						} = await refresh();
+						const { data: tokens } = await refresh();
 
-						setAuth((prev) => ({ ...prev, access: newAccessToken }));
-						localStorage.setItem('access', newAccessToken);
+						setAuthTokens(tokens);
+						localStorage.setItem('authTokens', tokens);
 
 						prevRequest = {
 							...prevRequest,
 							headers: {
 								...prevRequest.headers,
-								Authorization: `Bearer ${newAccessToken}`,
+								Authorization: `Bearer ${tokens?.access}`,
 							},
 						};
 
@@ -50,7 +50,9 @@ const useAxiosPrivate = () => {
 						if (error?.response?.status === 401) {
 							notify({ message: 'Your session has expired. Please log in again', toastOptions: { toastId: 'session_expired' } });
 
-							setAuth({});
+							queryClient.clear();
+							setAuthTokens(null);
+							setUser(null);
 							localStorage.clear();
 						}
 					}
@@ -64,7 +66,7 @@ const useAxiosPrivate = () => {
 			axiosPrivate.interceptors.response.eject(responseInterceptor);
 			axiosPrivate.interceptors.request.eject(requestInterceptor);
 		};
-	}, [auth, setAuth, refresh, notify]);
+	}, [authTokens, setAuthTokens, refresh, queryClient, setUser, notify]);
 
 	return axiosPrivate;
 };

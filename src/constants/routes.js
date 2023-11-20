@@ -1,6 +1,7 @@
 export const Approutes = {
 	auth: {
 		login: '/login',
+		logout: '/logout',
 		reset_password: '/reset-password',
 	},
 	dashboard: {

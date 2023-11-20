@@ -3,11 +3,11 @@ import { Appurls } from '../constants';
 import { axios } from '../library';
 
 const useRefreshToken = () => {
-	const { auth } = useAuth();
+	const { authTokens } = useAuth();
 
 	const refresh = () =>
 		axios.post(Appurls.auth.refresh_token, {
-			refresh: auth?.refresh || localStorage.getItem('refresh'),
+			refresh: authTokens?.refresh,
 		});
 
 	return refresh;

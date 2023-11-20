@@ -1,8 +1,7 @@
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {
 	Playground,
-	Home,
 	PageNotFound,
 	Login,
 	ResetPassword,
@@ -13,11 +12,13 @@ import {
 	StudentDashboard,
 	LecturerDashboard,
 	Events,
+	Logout,
 } from './pages';
 import { ApplyLayout } from './layout';
 import { Approutes } from './constants';
 import { GlobalStyles, theme } from './base';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -37,7 +38,7 @@ function App() {
 
 						{/* Use default layout on theses pages */}
 						<Route element={<ApplyLayout />}>
-							<Route path={Approutes.home} element={<Home />} />
+							<Route path={Approutes.home} element={<Navigate to={Approutes.dashboard.index} replace={true} />} />
 							<Route path={Approutes.dashboard.index} element={<Dashboard />} />
 							<Route path={Approutes.events} element={<Events />} />
 							<Route path={Approutes.dashboard.lecturer} element={<LecturerDashboard />} />
@@ -48,6 +49,7 @@ function App() {
 						</Route>
 
 						<Route path={Approutes.auth.login} element={<Login />} />
+						<Route path={Approutes.auth.logout} element={<Logout />} />
 						<Route path={Approutes.auth.reset_password} element={<ResetPassword />} />
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>

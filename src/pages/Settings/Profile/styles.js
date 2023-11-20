@@ -6,14 +6,14 @@ export const Container = styled.div`
 	padding: 2rem 2rem 1rem;
 	border-radius: 1rem;
 
-	h6 {
+	h3 {
 		color: #23262f;
 	}
-	h5 {
+	h4 {
 		color: #23262f;
 	}
 
-	p {
+	h3 + p {
 		font-size: 0.875rem;
 		color: #777e91;
 	}

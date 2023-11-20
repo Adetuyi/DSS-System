@@ -1,4 +1,5 @@
 export * from './formValidator';
+export * from './isUser';
 export * from './media';
 export { default as formValidator } from './formValidator';
 export { default as getDateTime } from './getDateTime';
