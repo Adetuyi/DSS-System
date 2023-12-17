@@ -31,7 +31,7 @@ const Navbar = () => {
 								</ul>
 							</li>
 						) : (
-							<NavLink key={list.name} to={list.link} end>
+							<NavLink key={list.name} to={list.link} end={list?.isEnd}>
 								<li>
 									<span className="active">{list.svg.active}</span> <span>{list.svg.default}</span> {list.name}
 								</li>

@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { Container } from './styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Approutes, Appurls } from '../../constants';
-import { RequireNoAuth } from '../../components';
+import { CSRFToken, RequireNoAuth } from '../../components';
 import { useAuth, useAxios, useNotify } from '../../hooks';
 import { useMutation } from '@tanstack/react-query';
 
 const Login = () => {
 	const axios = useAxios();
+	const { setUser } = useAuth();
+	const [searchParams] = useSearchParams();
+	const [formData, setFormData] = useState({ username: '', password: '' });
+
 	const notify = useNotify();
 	const navigate = useNavigate();
-	const { setUser } = useAuth();
-	const [formData, setFormData] = useState({ username: '', password: '' });
+
 	const { mutate: login, isPending } = useMutation({ mutationFn: (data) => axios.post(Appurls.auth.login, data) });
 
 	const handleChange = (event, name, value) => {
@@ -27,8 +30,8 @@ const Login = () => {
 		login(formData, {
 			onSuccess: (data) => {
 				setUser(data.data);
-				localStorage.setItem('authUser', JSON.stringify(data.data));
-				navigate(Approutes.home);
+				localStorage.setItem('user', JSON.stringify(data.data));
+				navigate(searchParams.get('next') || Approutes.home);
 			},
 			onError: (error) => {
 				notify({
@@ -48,6 +51,7 @@ const Login = () => {
 				</div>
 				<div>
 					<form onSubmit={handleSubmit}>
+						<CSRFToken />
 						<h2>Log in</h2>
 						<p>Welcome back! Please enter your details.</p>
 

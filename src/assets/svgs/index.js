@@ -2,6 +2,7 @@
 
 export { ReactComponent as CaretDown } from './CaretDown.svg';
 export { ReactComponent as CaretDownFill } from './CaretDownFill.svg';
+export { ReactComponent as ChevronDown } from './ChevronDown.svg';
 export { ReactComponent as Create } from './Create.svg';
 export { ReactComponent as Dashboard } from './Dashboard.svg';
 export { ReactComponent as DashboardActive } from './DashboardActive.svg';
@@ -20,6 +21,7 @@ export { ReactComponent as ModalClose } from './ModalClose.svg';
 export { ReactComponent as Logo } from './Logo.svg';
 export { ReactComponent as NotificationInfo } from './NotificationInfo.svg';
 export { ReactComponent as Search } from './Search.svg';
+export { ReactComponent as SelectClose } from './SelectClose.svg';
 export { ReactComponent as Setting } from './Setting.svg';
 export { ReactComponent as SettingActive } from './SettingActive.svg';
 export { ReactComponent as Spinner } from './Spinner.svg';

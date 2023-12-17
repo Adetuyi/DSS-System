@@ -3,21 +3,20 @@ import { getDateTime } from '../../../utilities';
 import { Container, FlexBox } from './styles';
 import { Boy, Classroom, Money, MoneyBag } from '../../../assets/images';
 import { Pallet, PalletList, ProgressBar, TableContainer, CustomPieChart, BarChart } from '../../../ui';
-import { useState } from 'react';
-import { DatePicker } from 'antd';
-import { studentTableColumns } from '../../../constants';
+import { Select } from 'antd';
+import { Approutes, studentTableColumns } from '../../../constants';
 import { useAuth } from '../../../hooks';
 
 const LecturerDashboard = () => {
-	const [barData, setBarData] = useState('Revenue');
+	// const [barData, setBarData] = useState('Revenue');
 	const { user } = useAuth();
 
-	const handleGetYearBarData = (year) => {
-		console.log(year);
-	};
-	const handleGetYearPieData = (year) => {
-		console.log(year);
-	};
+	// const handleGetYearBarData = (year) => {
+	// 	console.log(year);
+	// };
+	// const handleGetYearPieData = (year) => {
+	// 	console.log(year);
+	// };
 
 	return (
 		<Container>
@@ -40,64 +39,104 @@ const LecturerDashboard = () => {
 				<section className="statistics--con">
 					<header className="statistics--header">
 						<div>
-							<h6>Statistics</h6>
-							<div className="category">
+							<h6>Attendance Rate</h6>
+							{/* <div className="category">
 								<span onClick={() => setBarData('Revenue')} className={barData === 'Revenue' ? 'active' : ''}>
 									Revenue
 								</span>
 								<span onClick={() => setBarData('Student')} className={barData === 'Student' ? 'active' : ''}>
 									Student
 								</span>
-							</div>
+							</div> */}
 						</div>
 
 						<div className="right--section">
-							<DatePicker
-								placeholder="This Year"
-								// defaultValue={moment()}
-								onChange={(date, dateString) => {
-									handleGetYearBarData(dateString);
+							<Select
+								defaultValue="last_week"
+								style={{
+									width: 120,
 								}}
-								picker="year"
+								onChange={(value) => {
+									console.log(`selected ${value}`);
+								}}
+								options={[
+									{
+										value: 'last_week',
+										label: 'Last Week',
+									},
+									{
+										value: 'last_month',
+										label: 'Last Month',
+									},
+									{
+										value: 'last_year',
+										label: 'Last Year',
+									},
+								]}
 							/>
-							{/* <Calender className="svg" /> */}
 						</div>
 					</header>
 
 					<div>
-						<BarChart barData={barData} />
+						<BarChart
+							title={'Attendance Rate'}
+							subTitle={'Last 7 days'}
+							barData={[
+								{
+									name: 'Revenue',
+									data: [
+										{
+											x: 'Jan',
+											y: 8000,
+											name: 'january',
+										},
+										{
+											x: 'Sep',
+											y: 40000,
+											// fillColor: '#126DA9',
+											name: 'september',
+										},
+										{
+											x: 'Dec',
+											y: 0,
+											fillColor: '#a5a5a5',
+											name: 'december',
+										},
+									],
+								},
+							]}
+						/>
 					</div>
 				</section>
 
 				<section className="student--con">
 					<header>
-						<h6>Student</h6>
-						<div className="right">
-							<DatePicker
-								placeholder="This Year"
-								// defaultValue={moment()}
-								onChange={(date, dateString) => {
-									handleGetYearPieData(dateString);
-								}}
-								picker="year"
-							/>
-							{/* <Calender className="svg" /> */}
-						</div>
+						<h6>Gender Distribution</h6>
 					</header>
 					<div>
-						<CustomPieChart />
+						<CustomPieChart
+							data={[
+								{ label: 'Male', value: 30 },
+								{ label: 'Female', value: 10 },
+							]}
+						/>
 					</div>
 				</section>
 			</FlexBox>
 
 			<FlexBox>
 				<section className="table--con">
-					<TableContainer columns={studentTableColumns} dataSource={studentData} title={'Latest Students'} />
+					<TableContainer
+						columns={studentTableColumns}
+						options={{ all_link: Approutes.student.overview }}
+						dataSource={studentData}
+						title={'Latest Students'}
+					/>
 				</section>
 
 				<section className="slots--con">
 					<header>
-						<h6>Slot left</h6>
+						<h6>Attendance Rate</h6>
 					</header>
 					<div className="slots--items--con">
 						{slots.map((item) => (
@@ -105,7 +144,7 @@ const LecturerDashboard = () => {
 								<p>{item.title}</p>
 								<div className="fraction">
 									<div>
-										<ProgressBar fraction={item.open / item.total} />
+										<ProgressBar fraction={item.attendance / item.total} />
 									</div>
 									<p>{`${item.open} / ${item.total}`}</p>
 								</div>
@@ -126,19 +165,19 @@ const palletItems = [
 	{ title: 'Total students onboard ', body: '340', color: 'primary800', image: Boy },
 ];
 const slots = [
-	{ title: 'Product Design', total: 10, open: 2 },
-	{ title: 'Salesforce', total: 10, open: 5 },
-	{ title: 'Cloud eng', total: 10, open: 9 },
-	{ title: 'Product Management', total: 10, open: 5 },
-	{ title: 'QA Testing', total: 10, open: 4 },
-	{ title: 'DevOps', total: 10, open: 7 },
-	{ title: 'Data Science', total: 10, open: 4 },
+	{ title: 'CSC 400', total: 10, attendance: 2 },
+	{ title: 'CSC 401', total: 10, attendance: 5 },
+	{ title: 'CSC 402', total: 10, attendance: 9 },
+	{ title: 'CSC 403', total: 10, attendance: 5 },
+	{ title: 'CSC 404', total: 10, attendance: 4 },
+	{ title: 'CSC 405', total: 10, attendance: 7 },
+	{ title: 'CSC 406', total: 10, attendance: 4 },
 ];
 const studentData = [
 	{
 		key: '1',
 		name: 'Adebisi Konga',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '₦ 240,000',
 		plan: 'Full',
@@ -146,7 +185,7 @@ const studentData = [
 	{
 		key: '2',
 		name: 'Jim Green',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Two - times',
@@ -154,7 +193,7 @@ const studentData = [
 	{
 		key: '3',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Three - times',
@@ -162,7 +201,7 @@ const studentData = [
 	{
 		key: '4',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Three - times',
@@ -170,7 +209,7 @@ const studentData = [
 	{
 		key: '5',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Full',
@@ -178,7 +217,7 @@ const studentData = [
 	{
 		key: '6',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Full',
@@ -186,7 +225,7 @@ const studentData = [
 	{
 		key: '7',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Full',
@@ -194,7 +233,7 @@ const studentData = [
 	{
 		key: '8',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Two - times',
@@ -202,7 +241,7 @@ const studentData = [
 	{
 		key: '9',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Full',

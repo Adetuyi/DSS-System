@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { maxQuery } from '../../utilities';
+import { maxQuery } from '../../../../utilities';
 
 export const Container = styled.div`
 	.modal--content {
@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 				p:first-child {
 					color: ${({ theme }) => theme.colors.neutral600};
-					font-size: 0.75rem;
+					font-size: 0.875rem;
 					font-weight: 600;
 				}
 

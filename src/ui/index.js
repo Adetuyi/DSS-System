@@ -10,5 +10,6 @@ export { default as Pallet } from './Pallet';
 export { default as PalletList } from './PalletList/styles';
 export { default as CustomPieChart } from './PieChart';
 export { default as ProgressBar } from './ProgressBar';
+export { default as SelectGroup } from './SelectGroup';
 export { default as TableContainer } from './TableContainer';
 export { Tag } from './Tag/styles';

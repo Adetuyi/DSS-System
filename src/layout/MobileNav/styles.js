@@ -28,7 +28,7 @@ export const Container = styled.div`
 			position: relative;
 			background: ${({ theme }) => theme.colors.white};
 			border-radius: 0px 40px 40px 0px;
-			padding: 3rem 0;
+			padding: 2rem 0;
 			width: 13.75rem;
 			flex-shrink: 0;
 			display: flex;

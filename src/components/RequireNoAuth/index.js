@@ -1,21 +1,28 @@
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { Approutes } from '../../constants';
-import { useEffect } from 'react';
-import { useAuth } from '../../hooks';
+import { Approutes, Appurls } from '../../constants';
+import { useEffect, useRef } from 'react';
+import { useAxios } from '../../hooks';
 
 const RequireNoAuth = ({ children }) => {
+	const axios = useAxios();
 	const location = useLocation();
-	const navigate = useNavigate();
+	const isFirstTime = useRef(true);
 	const [searchParams] = useSearchParams();
-	const { authTokens } = useAuth();
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (authTokens && authTokens?.access) {
-			navigate(searchParams.get('next') || Approutes.home, {
-				replace: true,
-			});
-		}
-	}, [navigate, location, searchParams, authTokens]);
+		if (!isFirstTime.current) return;
+		isFirstTime.current = false;
+
+		axios.get(Appurls.auth.is_logged_in).then((data) => {
+			if (data.data?.status === true) {
+				navigate(searchParams.get('next') || Approutes.home, {
+					replace: true,
+				});
+			}
+		});
+	}, [navigate, location, searchParams, axios]);
 
 	return children;
 };

@@ -2,18 +2,18 @@ import { useRef, useState } from 'react';
 import { Button, InputGroup } from '../../../ui';
 import { Container } from './styles';
 import { useMutation } from '@tanstack/react-query';
-import { useAuth, useAxiosPrivate, useNotify } from '../../../hooks';
+import { useAuth, useAxios, useNotify } from '../../../hooks';
 import { Appurls } from '../../../constants';
 
 const Profile = () => {
-	const axiosPrivate = useAxiosPrivate();
+	const axios = useAxios();
 	const notify = useNotify();
 	const errorRef = useRef();
 	const { user } = useAuth();
 	const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', password: '', confirm_password: '' });
 
 	const { mutate: changePassword, isPending: isChangingPassword } = useMutation({
-		mutationFn: (data) => axiosPrivate.post(Appurls.auth.change_password, data),
+		mutationFn: (data) => axios.post(Appurls.auth.change_password, data),
 	});
 
 	const handleChange = (event, name, value) => {

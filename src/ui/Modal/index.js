@@ -2,7 +2,7 @@ import { ModalClose } from '../../assets/svgs';
 import { ModalCon } from './styles';
 import { useEffect, useRef } from 'react';
 
-const Modal = ({ children, closeModal, heading, editing }) => {
+const Modal = ({ children, closeModal, heading }) => {
 	const modalRef = useRef();
 
 	useEffect(() => {
@@ -24,11 +24,6 @@ const Modal = ({ children, closeModal, heading, editing }) => {
 			<div ref={modalRef} className="modal--content">
 				<header>
 					{heading && <h1>{heading}</h1>}
-					{editing && (
-						<p>
-							This event was created on - <span>Sept. 16, 2022</span>
-						</p>
-					)}
 					<ModalClose onClick={() => closeModal()} />
 				</header>
 				{children}

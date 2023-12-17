@@ -1,36 +1,36 @@
 import { useState } from 'react';
-import { Create } from '../../assets/svgs';
-import { DetailsModal, PageHeader } from '../../components';
-import TableContainer from '../../ui/TableContainer';
+import { Create } from '../../../../assets/svgs';
+import { PageHeader, DetailsModal } from '../../../../components';
+import TableContainer from '../../../../ui/TableContainer';
 import { Container } from './styles';
 import { columns } from './tableColumns';
-import { useCreateStudent, useDeleteStudent, useGetStudents, useNotify, useUpdateStudent } from '../../hooks';
+import { useCreateCourse, useDeleteCourse, useGetCourses, useNotify, useUpdateCourse } from '../../../../hooks';
 import CreateModal from './CreateModal';
 import EditModal from './EditModal';
 
-const StudentManagement = () => {
+const CourseManagement = () => {
 	const notify = useNotify();
 
 	const [formData, setFormData] = useState({
 		id: '',
-		first_name: '',
-		last_name: '',
-		date_of_birth: '',
-		matric_number: '',
+		title: '',
+		code: '',
+		unit: '',
+		status: '',
 	});
 	const [modal, setModal] = useState({ isCreating: false, isEditing: false, isViewing: false });
 
 	const detailsData = [
-		{ name: 'First Name', value: formData.first_name },
-		{ name: 'Last Name', value: formData.last_name },
-		{ name: 'Date Of Birth', value: formData.date_of_birth },
-		{ name: 'Matric Number', value: formData.matric_number },
+		{ name: 'Title', value: formData.title },
+		{ name: 'Code', value: formData.code },
+		{ name: 'Unit', value: formData.unit },
+		{ name: 'Status', value: formData.status },
 	];
 
-	const { data: students, isLoading, refetch } = useGetStudents();
-	const { mutate: createStudent, isLoading: isCreating } = useCreateStudent();
-	const { mutate: updateStudent, isLoading: isUpdating } = useUpdateStudent();
-	const { mutate: deleteStudent } = useDeleteStudent();
+	const { data: courses, isLoading, refetch } = useGetCourses();
+	const { mutate: createCourse, isLoading: isCreating } = useCreateCourse();
+	const { mutate: updateCourse, isLoading: isUpdating } = useUpdateCourse();
+	const { mutate: deleteCourse } = useDeleteCourse();
 
 	const handleChange = (event, name, value) => {
 		name = event?.target?.name || name || '';
@@ -39,12 +39,12 @@ const StudentManagement = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 	const handleDelete = (record) => {
-		deleteStudent(record?.id, {
+		deleteCourse(record?.id, {
 			onSuccess: () => {
 				refetch();
-				notify({ message: 'Student deleted successfully!', status: 'success', toastOptions: { toastId: 'student_deletion_success' } });
+				notify({ message: 'Course deleted successfully!', status: 'success', toastOptions: { toastId: 'course_deletion_success' } });
 			},
-			onError: () => notify({ message: 'Unable to delete student!', status: 'error', toastOptions: { toastId: 'student_deletion_failure' } }),
+			onError: () => notify({ message: 'Unable to delete course!', status: 'error', toastOptions: { toastId: 'course_deletion_failure' } }),
 		});
 	};
 	const handleEdit = (record) => {
@@ -55,6 +55,7 @@ const StudentManagement = () => {
 		setFormData(record);
 		setModal((prev) => ({ ...prev, isViewing: true }));
 	};
+
 	const handleCreateModalClose = () => {
 		setModal((prev) => ({ ...prev, isCreating: false }));
 		resetFormData();
@@ -68,70 +69,74 @@ const StudentManagement = () => {
 		resetFormData();
 	};
 
-	const handleStudentCreation = (event) => {
+	const handleCourseCreation = (event) => {
 		event.preventDefault();
 
-		createStudent(formData, {
+		createCourse(formData, {
 			onSuccess: () => {
 				refetch();
-				setModal((prev) => ({ ...prev, isCreating: false }));
-				notify({ message: 'Student added successfully!', status: 'success', toastOptions: { toastId: 'student_creation_success' } });
+				notify({ message: 'Course added successfully!', status: 'success', toastOptions: { toastId: 'course_creation_success' } });
 			},
 			onError: (error) =>
 				notify({
-					message: error?.response?.data?.detail || 'Unable to create student!',
+					message: error?.response?.data?.detail || 'Unable to create course!',
 					status: 'error',
-					toastOptions: { toastId: 'student_creation_failure' },
+					toastOptions: { toastId: 'course_creation_failure' },
 				}),
-			onSettled: () => resetFormData(),
+			onSettled: () => {
+				setModal((prev) => ({ ...prev, isCreating: false }));
+				resetFormData();
+			},
 		});
 	};
-	const handleStudentEditing = (event) => {
+	const handleCourseEditing = (event) => {
 		event.preventDefault();
 
 		const { id, ...data } = formData;
 
-		updateStudent(
+		updateCourse(
 			{ id, data },
 			{
 				onSuccess: () => {
 					refetch();
-					setModal((prev) => ({ ...prev, isEditing: false }));
-					notify({ message: 'Student updated successfully!', status: 'success', toastOptions: { toastId: 'student_updating_success' } });
+					notify({ message: 'Course updated successfully!', status: 'success', toastOptions: { toastId: 'course_updating_success' } });
 				},
 				onError: (error) =>
 					notify({
-						message: error?.response?.data?.detail || 'Unable to update student!',
+						message: error?.response?.data?.detail || 'Unable to update course!',
 						status: 'error',
-						toastOptions: { toastId: 'student_updating_failure' },
+						toastOptions: { toastId: 'course_updating_failure' },
 					}),
-				onSettled: () => resetFormData(),
+				onSettled: () => {
+					setModal((prev) => ({ ...prev, isEditing: false }));
+					resetFormData();
+				},
 			}
 		);
 	};
 	const resetFormData = () =>
 		setFormData({
 			id: '',
-			first_name: '',
-			last_name: '',
-			date_of_birth: '',
-			matric_number: '',
+			title: '',
+			code: '',
+			unit: '',
+			status: '',
 		});
 
 	return (
 		<Container>
-			<PageHeader title="Student Management" />
+			<PageHeader title="Course Management" />
 
 			<TableContainer
 				columns={columns({
-					handleView,
 					handleDelete,
 					handleEdit,
+					handleView,
 				})}
-				title={`All Students: ${students?.length || 0}`}
-				dataSource={students}
+				title={`All Courses: ${courses?.length || 0}`}
+				dataSource={courses}
 				options={{
-					button: 'Create student',
+					button: 'Create course',
 					handleButtonClick: () => setModal((prev) => ({ ...prev, isCreating: true })),
 				}}
 				isLoading={isLoading}
@@ -144,7 +149,7 @@ const StudentManagement = () => {
 			{modal.isCreating ? (
 				<CreateModal
 					closeModal={handleCreateModalClose}
-					handleSubmit={handleStudentCreation}
+					handleSubmit={handleCourseCreation}
 					formData={formData}
 					handleChange={handleChange}
 					isLoading={isCreating}
@@ -154,13 +159,12 @@ const StudentManagement = () => {
 			{modal.isEditing ? (
 				<EditModal
 					closeModal={handleEditModalClose}
-					handleSubmit={handleStudentEditing}
+					handleSubmit={handleCourseEditing}
 					formData={formData}
 					handleChange={handleChange}
 					isLoading={isUpdating}
 				/>
 			) : null}
-
 			{modal.isViewing ? (
 				<DetailsModal
 					record={formData}
@@ -180,4 +184,4 @@ const StudentManagement = () => {
 	);
 };
 
-export default StudentManagement;
+export default CourseManagement;

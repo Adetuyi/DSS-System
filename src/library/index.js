@@ -1,1 +1,1 @@
-export { default as axios, axiosPrivate } from './axios';
+export { default as axios, API_BASE_URL } from './axios';

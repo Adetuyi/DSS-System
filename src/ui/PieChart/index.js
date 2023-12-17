@@ -1,7 +1,7 @@
 import Chart from 'react-apexcharts';
 import Container from './styles';
 
-const PieChart = () => {
+const PieChart = ({ data }) => {
 	// ApexChart Pie chart
 	const options = {
 		legend: {
@@ -10,7 +10,7 @@ const PieChart = () => {
 			fontSize: '10px',
 			fontWeight: '400',
 		},
-		labels: ['Product design', 'Salesforce', 'Cloud eng', 'QA Testing', 'Product management', 'DevOps', 'Data science'],
+		labels: data.map((item) => item.label),
 		colors: ['#9747FF', '#FCA997', '#B91293', '#C3E1FF', '#FB4E22', '#F3A8E2', '#FFD7A3'],
 		plotOptions: {
 			pie: {
@@ -89,7 +89,7 @@ const PieChart = () => {
 		},
 	};
 
-	const series = [30000, 28000, 50000, 40000, 22000, 48000, 22000];
+	const series = data.map((item) => item.value);
 
 	return (
 		<Container>

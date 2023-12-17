@@ -33,6 +33,7 @@ export const Header = styled.header`
 			}
 			.dropdown {
 				display: block;
+				box-shadow: 2px 5px rgba(0, 0, 0, 0.2);
 			}
 		}
 	}

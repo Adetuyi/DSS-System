@@ -4,6 +4,7 @@ export const Approutes = {
 		logout: '/logout',
 		reset_password: '/reset-password',
 	},
+	course: { overview: '/course/overview', attendance: '/course/attendance', assessment: '/course/assessment', exam: '/course/exam' },
 	dashboard: {
 		index: '/dashboard',
 		lecturer: '/dashboard/lecturer',
@@ -11,9 +12,9 @@ export const Approutes = {
 	},
 	events: '/events',
 	settings: { initial: '/settings', profile: '/settings/profile', department: '/settings/department', users: '/settings/users' },
-	students: {
+	student: {
 		initial: '/student',
-		management: '/student/management',
+		overview: '/student/overview',
 	},
 	home: '/',
 	playground: '/playground',

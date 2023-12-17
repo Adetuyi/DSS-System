@@ -37,8 +37,10 @@ export const Container = styled.div`
 			}
 
 			${StyledButton} {
-				margin-top: 2rem;
+				margin: 2rem auto;
 				font-size: 0.875rem;
+				width: 50%;
+				min-width: max-content;
 			}
 		}
 	}
