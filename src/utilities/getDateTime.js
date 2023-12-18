@@ -17,7 +17,7 @@ const getDateTime = (d, format = 'dd/mm/yyyy', isDate = true) => {
 		} else if (format === 'dd/mm/yyyy') {
 			let date = new Date(d);
 			let day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
-			let month = date.getMonth().toString().length === 1 ? `0${date.getMonth()}` : date.getMonth();
+			let month = (date.getMonth() + 1).toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
 			let year = date.getFullYear().toString().length === 1 ? `0${date.getFullYear()}` : date.getFullYear();
 
 			return `${day}/${month}/${year}`;

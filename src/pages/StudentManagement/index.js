@@ -7,6 +7,7 @@ import { columns } from './tableColumns';
 import { useCreateStudent, useDeleteStudent, useGetStudents, useNotify, useUpdateStudent } from '../../hooks';
 import CreateModal from './CreateModal';
 import EditModal from './EditModal';
+import { getDateTime } from '../../utilities';
 
 const StudentManagement = () => {
 	const notify = useNotify();
@@ -23,7 +24,7 @@ const StudentManagement = () => {
 	const detailsData = [
 		{ name: 'First Name', value: formData.first_name },
 		{ name: 'Last Name', value: formData.last_name },
-		{ name: 'Date Of Birth', value: formData.date_of_birth },
+		{ name: 'Date Of Birth', value: getDateTime(formData.date_of_birth, 'mm dd yyyy') },
 		{ name: 'Matric Number', value: formData.matric_number },
 	];
 

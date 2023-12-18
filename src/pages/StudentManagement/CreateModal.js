@@ -12,8 +12,8 @@ const CreateModal = ({ closeModal, handleSubmit, formData, handleChange, isLoadi
 					<InputGroup
 						type="date"
 						label="Date of Birth"
-						name="date_of_bith"
-						value={formData.date_of_bith}
+						name="date_of_birth"
+						value={formData.date_of_birth}
 						onChange={handleChange}
 						placeholder="e.g 1/1/2023"
 						required

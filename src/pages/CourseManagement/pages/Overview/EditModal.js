@@ -22,6 +22,7 @@ const EditModal = ({ closeModal, handleSubmit, formData, handleChange, isLoading
 						placeholder="e.g 3"
 						required
 						options={['1', '2', '3', '4']}
+						shouldFilterByDefault={false}
 					/>
 					<SelectGroup
 						label="Status"
@@ -31,6 +32,7 @@ const EditModal = ({ closeModal, handleSubmit, formData, handleChange, isLoading
 						placeholder="e.g C"
 						required
 						options={['C', 'R', 'E']}
+						shouldFilterByDefault={false}
 					/>
 				</div>
 				<div className="button--group">

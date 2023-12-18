@@ -1,5 +1,6 @@
 import { Space } from 'antd';
 import { Delete, Edit, EyeOpen } from '../../assets/svgs';
+import { getDateTime } from '../../utilities';
 
 export const columns = ({ handleDelete, handleEdit, handleView }) => [
 	{
@@ -17,6 +18,7 @@ export const columns = ({ handleDelete, handleEdit, handleView }) => [
 		title: 'Date of Birth',
 		dataIndex: 'date_of_birth',
 		key: 'date_of_birth',
+		render: (record) => getDateTime(record, 'mm dd yyyy'),
 	},
 	{
 		title: 'Matric Number',
