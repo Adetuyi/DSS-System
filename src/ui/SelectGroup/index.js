@@ -9,7 +9,7 @@ const SelectGroup = ({
 	placeholder,
 	variant = 'single',
 	name,
-	dropdownPosBottom = true,
+	dropdownPosBottom = false,
 	options = [],
 	emptyOptionsMessage = 'No option to display',
 	required = false,

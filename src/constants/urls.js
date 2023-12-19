@@ -12,6 +12,12 @@ export const Appurls = {
 		update: (id) => `/attendance-update/${id}/`,
 		delete: (id) => `/attendance-delete/${id}/`,
 	},
+	assessment: {
+		get_all: '/assessment-list/',
+		create: '/assessment-create/',
+		update: (id) => `/assessment-update/${id}/`,
+		delete: (id) => `/assessment-delete/${id}/`,
+	},
 	course: {
 		get_all: '/course-list/',
 		create: '/course-create/',

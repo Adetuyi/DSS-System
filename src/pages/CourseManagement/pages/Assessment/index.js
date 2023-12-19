@@ -5,42 +5,42 @@ import TableContainer from '../../../../ui/TableContainer';
 import { Container } from './styles';
 import { columns } from './tableColumns';
 import {
-	useCreateAttendance,
-	useDeleteAttendance,
-	useGetAttendance,
+	useCreateAssessment,
+	useDeleteAssessment,
+	useGetAssessment,
 	useGetCourses,
 	useGetStudents,
 	useNotify,
-	useUpdateAttendance,
+	useUpdateAssessment,
 } from '../../../../hooks';
 import CreateModal from './CreateModal';
 import EditModal from './EditModal';
 import { handleApiError } from '../../../../utilities';
 
-const Attendance = () => {
+const Assessment = () => {
 	const notify = useNotify();
 
 	const [formData, setFormData] = useState({
 		id: '',
 		course: '',
-		class_number: '',
-		students: [],
+		score: '',
+		student: '',
 	});
 	const [modal, setModal] = useState({ isCreating: false, isEditing: false, isViewing: false });
 
-	const { data: attendance, isLoading, refetch } = useGetAttendance();
+	const { data: assessment, isLoading, refetch } = useGetAssessment();
 	const { data: students } = useGetStudents();
 	const { data: courses } = useGetCourses();
-	const { mutate: createAttendance, isLoading: isCreating } = useCreateAttendance();
-	const { mutate: updateAttendance, isLoading: isUpdating } = useUpdateAttendance();
-	const { mutate: deleteAttendance } = useDeleteAttendance();
+	const { mutate: createAssessment, isLoading: isCreating } = useCreateAssessment();
+	const { mutate: updateAssessment, isLoading: isUpdating } = useUpdateAssessment();
+	const { mutate: deleteAssessment } = useDeleteAssessment();
 
 	const detailsData = [
 		{ name: 'Course Code', value: formData.course.code },
 		{ name: 'Title', value: formData.course.title },
-		{ name: 'Class Number', value: formData.class_number },
-		{ name: 'Attendance Rate', value: `${formData.students.length}/${students?.length || 0}` },
-		{ name: 'Students Present', value: formData.students.map((student) => student.matric_number).join(', ') },
+		{ name: 'Matric Number', value: formData.student.matric_number },
+		{ name: 'First Name', value: formData.student.first_name },
+		{ name: 'Score', value: formData.score },
 	];
 
 	const handleChange = (event, name, value) => {
@@ -50,16 +50,16 @@ const Attendance = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 	const handleDelete = (record) => {
-		deleteAttendance(record?.id, {
+		deleteAssessment(record?.id, {
 			onSuccess: () => {
 				refetch();
-				notify({ message: 'Attendance deleted successfully!', status: 'success', toastOptions: { toastId: 'attendance_deletion_success' } });
+				notify({ message: 'Assessment deleted successfully!', status: 'success', toastOptions: { toastId: 'assessment_deletion_success' } });
 			},
 			onError: (error) =>
 				notify({
-					message: handleApiError(error) || 'Unable to delete attendance!',
+					message: handleApiError(error) || 'Unable to delete assessment!',
 					status: 'error',
-					toastOptions: { toastId: 'attendance_deletion_failure' },
+					toastOptions: { toastId: 'assessment_deletion_failure' },
 				}),
 		});
 	};
@@ -67,8 +67,8 @@ const Attendance = () => {
 		setFormData({
 			id: record.id,
 			course: record.course.id,
-			class_number: record.class_number,
-			students: record.students.map((student) => student.matric_number),
+			score: record.score,
+			student: record.student.matric_number,
 		});
 		setModal((prev) => ({ ...prev, isEditing: true }));
 	};
@@ -90,25 +90,25 @@ const Attendance = () => {
 		resetFormData();
 	};
 
-	const handleAttendanceCreation = (event) => {
+	const handleAssessmentCreation = (event) => {
 		event.preventDefault();
 
 		const data = {
 			course: formData.course,
-			class_number: parseInt(formData.class_number),
-			students: formData.students.map((matricNumber) => students?.find((student) => student.matric_number === matricNumber)?.id),
+			score: parseInt(formData.score),
+			student: students?.find((student) => student.matric_number === formData.student)?.id,
 		};
 
-		createAttendance(data, {
+		createAssessment(data, {
 			onSuccess: () => {
 				refetch();
-				notify({ message: 'Attendance added successfully!', status: 'success', toastOptions: { toastId: 'attendance_creation_success' } });
+				notify({ message: 'Assessment added successfully!', status: 'success', toastOptions: { toastId: 'assessment_creation_success' } });
 			},
 			onError: (error) =>
 				notify({
-					message: handleApiError(error) || 'Unable to create attendance!',
+					message: handleApiError(error) || 'Unable to create assessment!',
 					status: 'error',
-					toastOptions: { toastId: 'attendance_creation_failure' },
+					toastOptions: { toastId: 'assessment_creation_failure' },
 				}),
 			onSettled: () => {
 				setModal((prev) => ({ ...prev, isCreating: false }));
@@ -116,27 +116,27 @@ const Attendance = () => {
 			},
 		});
 	};
-	const handleAttendanceEditing = (event) => {
+	const handleAssessmentEditing = (event) => {
 		event.preventDefault();
 
 		const data = {
 			course: formData.course,
-			class_number: parseInt(formData.class_number),
-			students: formData.students.map((matricNumber) => students?.find((student) => student.matric_number === matricNumber)?.id),
+			score: parseInt(formData.score),
+			student: students?.find((student) => student.matric_number === formData.student)?.id,
 		};
 
-		updateAttendance(
+		updateAssessment(
 			{ id: formData.id, data },
 			{
 				onSuccess: () => {
 					refetch();
-					notify({ message: 'Attendance updated successfully!', status: 'success', toastOptions: { toastId: 'attendance_updating_success' } });
+					notify({ message: 'Assessment updated successfully!', status: 'success', toastOptions: { toastId: 'assessment_updating_success' } });
 				},
 				onError: (error) =>
 					notify({
-						message: handleApiError(error) || 'Unable to update attendance!',
+						message: handleApiError(error) || 'Unable to update assessment!',
 						status: 'error',
-						toastOptions: { toastId: 'attendance_updating_failure' },
+						toastOptions: { toastId: 'assessment_updating_failure' },
 					}),
 				onSettled: () => {
 					setModal((prev) => ({ ...prev, isEditing: false }));
@@ -149,13 +149,13 @@ const Attendance = () => {
 		setFormData({
 			id: '',
 			course: '',
-			class_number: '',
-			students: [],
+			score: '',
+			student: '',
 		});
 
 	return (
 		<Container>
-			<PageHeader title="Attendance Management" />
+			<PageHeader title="Assessment Management" />
 
 			<TableContainer
 				columns={columns({
@@ -164,10 +164,10 @@ const Attendance = () => {
 					handleEdit,
 					handleView,
 				})}
-				title={`All Attendances: ${attendance?.length || 0}`}
-				dataSource={attendance}
+				title={`All Assessments: ${assessment?.length || 0}`}
+				dataSource={assessment}
 				options={{
-					button: 'Create attendance',
+					button: 'Create assessment',
 					handleButtonClick: () => setModal((prev) => ({ ...prev, isCreating: true })),
 				}}
 				isLoading={isLoading}
@@ -180,7 +180,7 @@ const Attendance = () => {
 			{modal.isCreating ? (
 				<CreateModal
 					closeModal={handleCreateModalClose}
-					handleSubmit={handleAttendanceCreation}
+					handleSubmit={handleAssessmentCreation}
 					formData={formData}
 					handleChange={handleChange}
 					isLoading={isCreating}
@@ -192,7 +192,7 @@ const Attendance = () => {
 			{modal.isEditing ? (
 				<EditModal
 					closeModal={handleEditModalClose}
-					handleSubmit={handleAttendanceEditing}
+					handleSubmit={handleAssessmentEditing}
 					formData={formData}
 					handleChange={handleChange}
 					isLoading={isUpdating}
@@ -219,4 +219,4 @@ const Attendance = () => {
 	);
 };
 
-export default Attendance;
+export default Assessment;

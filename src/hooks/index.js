@@ -1,3 +1,4 @@
+export * from './useAssessment';
 export * from './useAttendance';
 export * from './useCourses';
 export * from './useStudents';

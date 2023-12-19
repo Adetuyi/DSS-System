@@ -7,7 +7,7 @@ import { columns } from './tableColumns';
 import { useCreateStudent, useDeleteStudent, useGetStudents, useNotify, useUpdateStudent } from '../../hooks';
 import CreateModal from './CreateModal';
 import EditModal from './EditModal';
-import { getDateTime } from '../../utilities';
+import { getDateTime, handleApiError } from '../../utilities';
 
 const StudentManagement = () => {
 	const notify = useNotify();
@@ -45,7 +45,12 @@ const StudentManagement = () => {
 				refetch();
 				notify({ message: 'Student deleted successfully!', status: 'success', toastOptions: { toastId: 'student_deletion_success' } });
 			},
-			onError: () => notify({ message: 'Unable to delete student!', status: 'error', toastOptions: { toastId: 'student_deletion_failure' } }),
+			onError: (error) =>
+				notify({
+					message: handleApiError(error) || 'Unable to delete student!',
+					status: 'error',
+					toastOptions: { toastId: 'student_deletion_failure' },
+				}),
 		});
 	};
 	const handleEdit = (record) => {
@@ -80,7 +85,7 @@ const StudentManagement = () => {
 			},
 			onError: (error) =>
 				notify({
-					message: error?.response?.data?.detail || 'Unable to create student!',
+					message: handleApiError(error) || 'Unable to create student!',
 					status: 'error',
 					toastOptions: { toastId: 'student_creation_failure' },
 				}),
@@ -102,7 +107,7 @@ const StudentManagement = () => {
 				},
 				onError: (error) =>
 					notify({
-						message: error?.response?.data?.detail || 'Unable to update student!',
+						message: handleApiError(error) || 'Unable to update student!',
 						status: 'error',
 						toastOptions: { toastId: 'student_updating_failure' },
 					}),
