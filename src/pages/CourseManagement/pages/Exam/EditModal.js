@@ -30,10 +30,10 @@ const EditModal = ({ courses, students, closeModal, handleSubmit, formData, hand
 					type="number"
 					value={formData.score}
 					onChange={handleChange}
-					placeholder="e.g 0 - 30"
+					placeholder="e.g 0 - 70"
 					required
 					min={0}
-					max={30}
+					max={70}
 				/>
 
 				<div className="button--group">

@@ -16,7 +16,7 @@ import {
 	CourseOverview,
 	CourseAttendance,
 	CourseAssessment,
-	// CourseExam,
+	CourseExam,
 } from './pages';
 import { ApplyLayout } from './layout';
 import { Approutes } from './constants';
@@ -55,7 +55,7 @@ function App() {
 								<Route path={Approutes.course.overview} element={<CourseOverview />} />
 								<Route path={Approutes.course.assessment} element={<CourseAssessment />} />
 								<Route path={Approutes.course.attendance} element={<CourseAttendance />} />
-								{/* <Route path={Approutes.course.exam} element={<CourseExam />} /> */}
+								<Route path={Approutes.course.exam} element={<CourseExam />} />
 								<Route path={Approutes.student.overview} element={<StudentManagement />} />
 							</Route>
 						</Route>

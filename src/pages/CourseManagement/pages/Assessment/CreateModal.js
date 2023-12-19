@@ -29,8 +29,10 @@ const CreateModal = ({ students, courses, closeModal, handleSubmit, formData, ha
 					type="number"
 					value={formData.score}
 					onChange={handleChange}
-					placeholder="e.g 20"
+					placeholder="e.g 0 - 30"
 					required
+					min={0}
+					max={30}
 				/>
 
 				<div className="button--group">

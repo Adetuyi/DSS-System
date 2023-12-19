@@ -1,8 +1,8 @@
 import { Button, InputGroup, Modal, SelectGroup } from '../../../../ui';
 
-const EditModal = ({ courses, students, closeModal, handleSubmit, formData, handleChange, isLoading }) => {
+const CreateModal = ({ students, courses, closeModal, handleSubmit, formData, handleChange, isLoading }) => {
 	return (
-		<Modal closeModal={closeModal} heading={'Edit Course'}>
+		<Modal closeModal={closeModal} heading={'Create Course'}>
 			<form onSubmit={handleSubmit}>
 				<SelectGroup
 					label="Course Code"
@@ -22,7 +22,6 @@ const EditModal = ({ courses, students, closeModal, handleSubmit, formData, hand
 					placeholder="Select student"
 					required
 					options={students?.map((student) => student.matric_number)}
-					shouldFilterByDefault={false}
 				/>
 				<InputGroup
 					label="Assessment Score"
@@ -30,10 +29,10 @@ const EditModal = ({ courses, students, closeModal, handleSubmit, formData, hand
 					type="number"
 					value={formData.score}
 					onChange={handleChange}
-					placeholder="e.g 0 - 30"
+					placeholder="e.g 0 - 70"
 					required
 					min={0}
-					max={30}
+					max={70}
 				/>
 
 				<div className="button--group">
@@ -48,4 +47,4 @@ const EditModal = ({ courses, students, closeModal, handleSubmit, formData, hand
 		</Modal>
 	);
 };
-export default EditModal;
+export default CreateModal;
