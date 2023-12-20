@@ -18,12 +18,14 @@ const StudentManagement = () => {
 		last_name: '',
 		date_of_birth: '',
 		matric_number: '',
+		gender: '',
 	});
 	const [modal, setModal] = useState({ isCreating: false, isEditing: false, isViewing: false, isPredicting: false });
 
 	const detailsData = [
 		{ name: 'First Name', value: formData.first_name },
 		{ name: 'Last Name', value: formData.last_name },
+		{ name: 'Gender', value: formData.gender },
 		{ name: 'Date Of Birth', value: getDateTime(formData.date_of_birth, 'mm dd yyyy') },
 		{ name: 'Matric Number', value: formData.matric_number },
 	];
@@ -130,6 +132,7 @@ const StudentManagement = () => {
 			last_name: '',
 			date_of_birth: '',
 			matric_number: '',
+			gender: '',
 		});
 
 	return (

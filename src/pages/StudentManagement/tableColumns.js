@@ -15,15 +15,20 @@ export const columns = ({ handleDelete, handleEdit, handleView, handlePredict })
 		key: 'last_name',
 	},
 	{
+		title: 'Matric Number',
+		dataIndex: 'matric_number',
+		key: 'matric_number',
+	},
+	{
+		title: 'Gender',
+		dataIndex: 'gender',
+		key: 'gender',
+	},
+	{
 		title: 'Date of Birth',
 		dataIndex: 'date_of_birth',
 		key: 'date_of_birth',
 		render: (record) => getDateTime(record, 'mm dd yyyy'),
-	},
-	{
-		title: 'Matric Number',
-		dataIndex: 'matric_number',
-		key: 'matric_number',
 	},
 	{
 		title: 'Action',
