@@ -63,7 +63,32 @@ const StudentDashboard = () => {
 					</header>
 
 					<div>
-						<BarChart barData={barData} />
+						<BarChart
+							barData={[
+								{
+									name: 'Revenue',
+									data: [
+										{
+											x: 'Jan',
+											y: 8000,
+											name: 'january',
+										},
+										{
+											x: 'Sep',
+											y: 40000,
+											// fillColor: '#126DA9',
+											name: 'september',
+										},
+										{
+											x: 'Dec',
+											y: 0,
+											fillColor: '#a5a5a5',
+											name: 'december',
+										},
+									],
+								},
+							]}
+						/>
 					</div>
 				</section>
 
@@ -83,7 +108,12 @@ const StudentDashboard = () => {
 						</div>
 					</header>
 					<div>
-						<CustomPieChart />
+						<CustomPieChart
+							data={[
+								{ label: 'Male', value: 30 },
+								{ label: 'Female', value: 10 },
+							]}
+						/>
 					</div>
 				</section>
 			</FlexBox>
@@ -136,7 +166,7 @@ const studentData = [
 	{
 		key: '1',
 		name: 'Adebisi Konga',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '₦ 240,000',
 		plan: 'Full',
@@ -144,7 +174,7 @@ const studentData = [
 	{
 		key: '2',
 		name: 'Jim Green',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Two - times',
@@ -152,7 +182,7 @@ const studentData = [
 	{
 		key: '3',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Three - times',
@@ -160,7 +190,7 @@ const studentData = [
 	{
 		key: '4',
 		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Three - times',
@@ -168,39 +198,7 @@ const studentData = [
 	{
 		key: '5',
 		name: 'Joe Black',
-		program: 'Product design',
-		date_joined: 'Sept 11, 2022',
-		price: '#240,000',
-		plan: 'Full',
-	},
-	{
-		key: '6',
-		name: 'Joe Black',
-		program: 'Product design',
-		date_joined: 'Sept 11, 2022',
-		price: '#240,000',
-		plan: 'Full',
-	},
-	{
-		key: '7',
-		name: 'Joe Black',
-		program: 'Product design',
-		date_joined: 'Sept 11, 2022',
-		price: '#240,000',
-		plan: 'Full',
-	},
-	{
-		key: '8',
-		name: 'Joe Black',
-		program: 'Product design',
-		date_joined: 'Sept 11, 2022',
-		price: '#240,000',
-		plan: 'Two - times',
-	},
-	{
-		key: '9',
-		name: 'Joe Black',
-		program: 'Product design',
+		matric_no: '190591000',
 		date_joined: 'Sept 11, 2022',
 		price: '#240,000',
 		plan: 'Full',

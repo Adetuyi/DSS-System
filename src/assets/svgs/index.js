@@ -20,6 +20,7 @@ export { ReactComponent as Menu } from './Menu.svg';
 export { ReactComponent as ModalClose } from './ModalClose.svg';
 export { ReactComponent as Logo } from './Logo.svg';
 export { ReactComponent as NotificationInfo } from './NotificationInfo.svg';
+export { ReactComponent as Predict } from './Predict.svg';
 export { ReactComponent as Search } from './Search.svg';
 export { ReactComponent as SelectClose } from './SelectClose.svg';
 export { ReactComponent as Setting } from './Setting.svg';

@@ -1,8 +1,8 @@
 import { Space } from 'antd';
-import { Delete, Edit, EyeOpen } from '../../assets/svgs';
+import { Delete, Edit, EyeOpen, Predict } from '../../assets/svgs';
 import { getDateTime } from '../../utilities';
 
-export const columns = ({ handleDelete, handleEdit, handleView }) => [
+export const columns = ({ handleDelete, handleEdit, handleView, handlePredict }) => [
 	{
 		title: 'First Name',
 		dataIndex: 'first_name',
@@ -31,13 +31,16 @@ export const columns = ({ handleDelete, handleEdit, handleView }) => [
 		render: (record) => (
 			<Space size="middle">
 				<span style={{ cursor: 'pointer' }}>
-					<EyeOpen style={{ width: '16px', height: 'auto' }} onClick={() => handleView(record)} />
+					<EyeOpen title="Open Record" style={{ width: '16px', height: 'auto' }} onClick={() => handleView(record)} />
 				</span>
 				<span style={{ cursor: 'pointer' }}>
-					<Edit onClick={() => handleEdit(record)} />
+					<Edit title="Edit Record" onClick={() => handleEdit(record)} />
 				</span>
 				<span style={{ cursor: 'pointer' }}>
-					<Delete onClick={() => handleDelete(record)} />
+					<Delete title="Delete Record" onClick={() => handleDelete(record)} />
+				</span>
+				<span style={{ cursor: 'pointer' }}>
+					<Predict title="Predict Performance" onClick={() => handlePredict(record)} />
 				</span>
 			</Space>
 		),

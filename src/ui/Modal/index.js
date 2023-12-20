@@ -1,8 +1,9 @@
+import { Spin } from 'antd';
 import { ModalClose } from '../../assets/svgs';
 import { ModalCon } from './styles';
 import { useEffect, useRef } from 'react';
 
-const Modal = ({ children, closeModal, heading }) => {
+const Modal = ({ children, closeModal, heading, loading }) => {
 	const modalRef = useRef();
 
 	useEffect(() => {
@@ -26,7 +27,14 @@ const Modal = ({ children, closeModal, heading }) => {
 					{heading && <h1>{heading}</h1>}
 					<ModalClose onClick={() => closeModal()} />
 				</header>
-				{children}
+
+				{loading ? (
+					<center>
+						<Spin />
+					</center>
+				) : (
+					children
+				)}
 			</div>
 		</ModalCon>
 	);

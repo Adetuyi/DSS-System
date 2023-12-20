@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Create } from '../../assets/svgs';
-import { DetailsModal, PageHeader } from '../../components';
+import { DetailsModal, PageHeader, PredictionModal } from '../../components';
 import TableContainer from '../../ui/TableContainer';
 import { Container } from './styles';
 import { columns } from './tableColumns';
@@ -19,7 +19,7 @@ const StudentManagement = () => {
 		date_of_birth: '',
 		matric_number: '',
 	});
-	const [modal, setModal] = useState({ isCreating: false, isEditing: false, isViewing: false });
+	const [modal, setModal] = useState({ isCreating: false, isEditing: false, isViewing: false, isPredicting: false });
 
 	const detailsData = [
 		{ name: 'First Name', value: formData.first_name },
@@ -61,6 +61,10 @@ const StudentManagement = () => {
 		setFormData(record);
 		setModal((prev) => ({ ...prev, isViewing: true }));
 	};
+	const handlePredict = (record) => {
+		setFormData(record);
+		setModal((prev) => ({ ...prev, isPredicting: true }));
+	};
 	const handleCreateModalClose = () => {
 		setModal((prev) => ({ ...prev, isCreating: false }));
 		resetFormData();
@@ -71,6 +75,10 @@ const StudentManagement = () => {
 	};
 	const handleDetailsModalClose = () => {
 		setModal((prev) => ({ ...prev, isViewing: false }));
+		resetFormData();
+	};
+	const handlePredictionModalClose = () => {
+		setModal((prev) => ({ ...prev, isPredicting: false }));
 		resetFormData();
 	};
 
@@ -133,6 +141,7 @@ const StudentManagement = () => {
 					handleView,
 					handleDelete,
 					handleEdit,
+					handlePredict,
 				})}
 				title={`All Students: ${students?.length || 0}`}
 				dataSource={students}
@@ -182,6 +191,8 @@ const StudentManagement = () => {
 					}}
 				/>
 			) : null}
+
+			{modal.isPredicting ? <PredictionModal student={formData} closeModal={handlePredictionModalClose} /> : null}
 		</Container>
 	);
 };

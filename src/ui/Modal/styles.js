@@ -59,5 +59,11 @@ export const ModalCon = styled.div`
 				}
 			}
 		}
+
+		> center {
+			min-height: 300px;
+			display: grid;
+			place-items: center;
+		}
 	}
 `;

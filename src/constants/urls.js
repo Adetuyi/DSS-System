@@ -24,6 +24,7 @@ export const Appurls = {
 		update: (id) => `/exam-update/${id}/`,
 		delete: (id) => `/exam-delete/${id}/`,
 	},
+	predict: (id) => `/predict/${id}/`,
 	course: {
 		get_all: '/course-list/',
 		create: '/course-create/',
